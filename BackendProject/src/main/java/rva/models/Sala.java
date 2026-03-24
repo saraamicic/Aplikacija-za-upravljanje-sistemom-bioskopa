@@ -1,12 +1,33 @@
 package rva.models;
 
+import java.util.List;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.SequenceGenerator;
+
+@Entity
 public class Sala {
 	
+	@Id
+	@SequenceGenerator(name = "sala_seq", sequenceName = "sala_seq", allocationSize=1) // za koliko ce se sekvenca povecavati i kako se zove
+	@GeneratedValue (strategy = GenerationType.SEQUENCE , generator = "sala_seq")
 	private long id;
 	private int kapacitet;
 	private int brojRedova;
 	
+	@ManyToOne
+	@JoinColumn(name = "bioskop")
+	private Bioskop bioskop;
 	
+	@OneToMany(mappedBy="sala")
+	private List <Rezervacija> rezervacije;
+
 	public Sala(long id, int kapacitet, int brojRedova) {
 		super();
 		this.id = id;

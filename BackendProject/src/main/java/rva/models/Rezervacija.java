@@ -2,13 +2,33 @@ package rva.models;
 
 import java.util.Date;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
+
+@Entity
 public class Rezervacija {
 
+	@Id
+	@SequenceGenerator(name = "rezervacija_seq", sequenceName = "rezervacija_seq", allocationSize=1) // za koliko ce se sekvenca povecavati i kako se zove
+	@GeneratedValue (strategy = GenerationType.SEQUENCE , generator = "rezervacija_seq")
 	private long id;
 	private int brojOsoba;
 	private double cenaKarte;
 	private Date datum;
 	private boolean placeno;
+	
+	@ManyToOne
+	@JoinColumn(name = "film")
+	private Film film;
+	
+	@ManyToOne
+	@JoinColumn(name = "sala")
+	private Sala sala;
 	
 	public Rezervacija(long id, int brojOsoba, double cenaKarte, Date datum, boolean placeno) {
 		super();
