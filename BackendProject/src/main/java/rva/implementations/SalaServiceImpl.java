@@ -24,7 +24,7 @@ public class SalaServiceImpl implements SalaService {
 	}
 
 	@Override
-	public boolean existById(long id) {
+	public boolean existsById(long id) {
 		return repo.existsById(id);
 	}
 
@@ -36,7 +36,7 @@ public class SalaServiceImpl implements SalaService {
 	@Override
 	public Optional<Sala> update(Sala body, long id) {
 		
-		if(existById(id))
+		if(existsById(id))
 		{
 			body.setId(id);
 			return Optional.of(repo.save(body));
@@ -58,6 +58,12 @@ public class SalaServiceImpl implements SalaService {
 	@Override
 	public List<Sala> getSalaByBioskop(Bioskop bioskop) {
 		return repo.findByBioskop(bioskop);
+	}
+
+	@Override
+	public Optional<Sala> findById(long id) {
+		// TODO Auto-generated method stub
+		return repo.findById(id);
 	}
 
 }

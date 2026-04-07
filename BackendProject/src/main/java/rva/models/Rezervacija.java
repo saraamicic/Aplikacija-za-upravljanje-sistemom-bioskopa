@@ -30,6 +30,10 @@ public class Rezervacija {
 	@JoinColumn(name = "sala")
 	private Sala sala;
 	
+	public Rezervacija(){
+		
+	}
+	
 	public Rezervacija(long id, int brojOsoba, double cenaKarte, Date datum, boolean placeno) {
 		super();
 		this.id = id;

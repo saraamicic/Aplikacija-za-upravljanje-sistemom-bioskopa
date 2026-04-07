@@ -14,5 +14,5 @@ import rva.models.Bioskop;
 @Repository
 public interface BioskopRepository extends JpaRepository<Bioskop, Long> {
 
-	List<Bioskop> findByNazivLike (String naziv);
+	List<Bioskop> findByNazivContainingIgnoreCase (String naziv);
 }

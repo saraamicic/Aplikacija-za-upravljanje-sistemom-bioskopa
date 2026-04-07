@@ -11,5 +11,5 @@ import rva.models.Film;
 @Repository
 public interface FilmRepository extends JpaRepository<Film, Long> {
 
-	List <Film> findByNazivLike (String naziv);
+	List <Film> findByNazivContainingIgnoreCase (String naziv);
 }

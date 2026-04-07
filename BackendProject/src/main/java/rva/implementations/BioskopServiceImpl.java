@@ -25,8 +25,8 @@ public class BioskopServiceImpl implements BioskopService {
 	}
 
 	@Override
-	public boolean existById(long id) {
-		return repo.existsById(null);
+	public boolean existsById(long id) {
+		return repo.existsById(id);
 		
 	}
 
@@ -39,7 +39,7 @@ public class BioskopServiceImpl implements BioskopService {
 	public Optional<Bioskop> update(Bioskop body, long id) {
 		
 		//hocemo da azuriramo samo ono sto vec postoji
-		if(existById(id))
+		if(existsById(id))
 		{
 			body.setId(id);
 			return Optional.of(repo.save(body));
@@ -55,7 +55,13 @@ public class BioskopServiceImpl implements BioskopService {
 
 	@Override
 	public List<Bioskop> getBioskopByNaziv(String naziv) {
-		return repo.findByNazivLike(naziv);
+		return repo.findByNazivContainingIgnoreCase(naziv);
+	}
+
+	@Override
+	public Optional<Bioskop> findById(long id) {
+		// TODO Auto-generated method stub
+		return repo.findById(id);
 	}
 
 }

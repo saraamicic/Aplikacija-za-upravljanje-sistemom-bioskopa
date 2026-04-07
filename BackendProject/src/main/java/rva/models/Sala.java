@@ -2,6 +2,7 @@ package rva.models;
 
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -25,9 +26,13 @@ public class Sala {
 	@JoinColumn(name = "bioskop")
 	private Bioskop bioskop;
 	
-	@OneToMany(mappedBy="sala")
+	@OneToMany(mappedBy="sala", cascade=CascadeType.ALL)
 	private List <Rezervacija> rezervacije;
 
+	public Sala(){
+		
+	}
+	
 	public Sala(long id, int kapacitet, int brojRedova) {
 		super();
 		this.id = id;

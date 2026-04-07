@@ -22,7 +22,7 @@ public class FilmServiceImpl implements FilmService {
 	}
 
 	@Override
-	public boolean existById(long id) {
+	public boolean existsById(long id) {
 		return repo.existsById(id);
 		
 	}
@@ -34,7 +34,7 @@ public class FilmServiceImpl implements FilmService {
 
 	@Override
 	public Optional<Film> update(Film body, long id) {
-		if(existById(id))
+		if(existsById(id))
 		{
 			body.setId(id);
 			return Optional.of(repo.save(body));
@@ -50,7 +50,13 @@ public class FilmServiceImpl implements FilmService {
 
 	@Override
 	public List<Film> getFilmByNaziv(String naziv) {
-		return repo.findByNazivLike(naziv);
+		return repo.findByNazivContainingIgnoreCase(naziv);
+	}
+
+	@Override
+	public Optional<Film> findById(long id) {
+		// TODO Auto-generated method stub
+		return repo.findById(id);
 	}
 
 }

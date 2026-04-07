@@ -23,7 +23,7 @@ public class RezervacijaServiceImpl implements RezervacijaService {
 	}
 
 	@Override
-	public boolean existById(long id) {
+	public boolean existsById(long id) {
 		return repo.existsById(id);
 	}
 
@@ -34,7 +34,7 @@ public class RezervacijaServiceImpl implements RezervacijaService {
 
 	@Override
 	public Optional<Rezervacija> update(Rezervacija body, long id) {
-		if(existById(id))
+		if(existsById(id))
 		{
 			body.setId(id);
 			return Optional.of(repo.save(body));
@@ -61,6 +61,12 @@ public class RezervacijaServiceImpl implements RezervacijaService {
 	@Override
 	public List<Rezervacija> getRezervacijaBySala(Sala sala) {
 		return repo.findBySala(sala);
+	}
+
+	@Override
+	public Optional<Rezervacija> findById(long id) {
+		// TODO Auto-generated method stub
+		return repo.findById(id);
 	}
 
 }
