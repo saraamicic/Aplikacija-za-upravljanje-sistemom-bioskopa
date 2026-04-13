@@ -33,6 +33,7 @@ public class BioskopController {
 	private BioskopService service; //ovo je interfejs (dependancy injection)
 	
 	//ResponseEntity je klasa koja modeluje http odgovor
+	
 	@GetMapping("/bioskops")
 	public ResponseEntity <?> getBioskops(@RequestParam (required = false) String naziv, @RequestParam (required = false) Long id){
 		
@@ -82,14 +83,12 @@ public class BioskopController {
 	@DeleteMapping("/bioskops")
 	public ResponseEntity<?> deleteBioskop(@RequestParam Long id)
 	{
-		//return ResponseEntity.status(200).body(id);
 		if(service.existsById(id) && id!=null)
 		{
 			service.delete(id);
 			return ResponseEntity.status(204).body(null);
 		}
 		return ResponseEntity.status(404).body(String.format("Resource with an ID: %s does not exist", id));
-		
 		
 	}
 		
