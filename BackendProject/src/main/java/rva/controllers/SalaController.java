@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import rva.models.Bioskop;
 import rva.models.Sala;
+import rva.services.BioskopService;
 import rva.services.SalaService;
 
 @RestController
@@ -23,6 +25,9 @@ public class SalaController {
 
 	@Autowired
 	private SalaService service;
+	
+	@Autowired
+	private BioskopService bioskopService;
 	
 	@GetMapping("/salas")
 	public ResponseEntity <?> getSalas(@RequestParam (required = false) Integer kapacitet, @RequestParam (required = false) Long id){
@@ -52,6 +57,22 @@ public class SalaController {
 		
 		return ResponseEntity.ok(service.getAll()); 
 	}
+	
+	
+	//za strani kljuc
+		@GetMapping("/salas/bioskop")
+		public ResponseEntity<?> getSalaByBioskop(@RequestParam Long bioskopId){
+			Optional<Bioskop> bioskop = bioskopService.findById(bioskopId);
+			if(bioskop.isEmpty()) {
+				return ResponseEntity.status(404).body(String.format("Bioskop with an ID: %s does not exist", bioskopId));
+			}
+			List<Sala> sale = service.getSalaByBioskop(bioskop.get());
+			if(sale.isEmpty()) {
+				return ResponseEntity.status(404).body(String.format("Sala with Bioskop ID: %s does not exist", bioskopId));
+			}
+			return ResponseEntity.ok(sale);
+		}
+	
 	
 	@PostMapping ("/salas")
 	public ResponseEntity<?> createSala(@RequestBody Sala sala)

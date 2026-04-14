@@ -33,11 +33,12 @@ public class Sala {
 		
 	}
 	
-	public Sala(long id, int kapacitet, int brojRedova) {
+	public Sala(long id, int kapacitet, int brojRedova, Bioskop bioskop) {
 		super();
 		this.id = id;
 		this.kapacitet = kapacitet;
 		this.brojRedova = brojRedova;
+		this.bioskop = bioskop;
 	}
 	
 	public long getId() {
@@ -58,6 +59,22 @@ public class Sala {
 	public void setBrojRedova(int brojRedova) {
 		this.brojRedova = brojRedova;
 	}
+
+	public Bioskop getBioskop() {
+		return bioskop;
+	}
+
+	public void setBioskop(Bioskop bioskop) {
+		this.bioskop = bioskop;
+	}
+
+	/*public List<Rezervacija> getRezervacije() {
+		return rezervacije;
+	}
+
+	public void setRezervacije(List<Rezervacija> rezervacije) {
+		this.rezervacije = rezervacije;
+	}*/
 	
 	
 	

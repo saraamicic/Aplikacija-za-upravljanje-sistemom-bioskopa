@@ -34,13 +34,15 @@ public class Rezervacija {
 		
 	}
 	
-	public Rezervacija(long id, int brojOsoba, double cenaKarte, Date datum, boolean placeno) {
+	public Rezervacija(long id, int brojOsoba, double cenaKarte, Date datum, boolean placeno, Film film, Sala sala) {
 		super();
 		this.id = id;
 		this.brojOsoba = brojOsoba;
 		this.cenaKarte = cenaKarte;
 		this.datum = datum;
 		this.placeno = placeno;
+		this.film = film;
+		this.sala = sala;
 	}
 	
 	
@@ -73,6 +75,22 @@ public class Rezervacija {
 	}
 	public void setPlaceno(boolean placeno) {
 		this.placeno = placeno;
+	}
+
+	public Film getFilm() {
+		return film;
+	}
+
+	public void setFilm(Film film) {
+		this.film = film;
+	}
+
+	public Sala getSala() {
+		return sala;
+	}
+
+	public void setSala(Sala sala) {
+		this.sala = sala;
 	}
 	
 	

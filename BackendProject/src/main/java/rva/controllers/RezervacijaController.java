@@ -15,14 +15,24 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import rva.models.Film;
 import rva.models.Rezervacija;
+import rva.models.Sala;
+import rva.services.FilmService;
 import rva.services.RezervacijaService;
+import rva.services.SalaService;
 
 @RestController
 public class RezervacijaController {
 
 	@Autowired
 	private RezervacijaService service;
+	
+	@Autowired
+	private FilmService filmService;
+	
+	@Autowired
+	private SalaService salaService;
 	
 	@GetMapping("/rezervacijas")
 	public ResponseEntity <?> getRezervacijas(@RequestParam (required = false) Boolean placeno, @RequestParam (required = false) Long id){
@@ -49,9 +59,37 @@ public class RezervacijaController {
 		}else if (placeno != null && id != null) { 
 			return ResponseEntity.badRequest().body("Request can only accept either ID or Placeno");
 		}
-		
 		return ResponseEntity.ok(service.getAll()); 
 	}
+	
+	
+	//za strani kljuc
+	@GetMapping("/rezervacijas/film")
+	public ResponseEntity<?> getRezervacijaByFilm(@RequestParam Long filmId){
+		Optional<Film> film = filmService.findById(filmId);
+		if(film.isEmpty()) {
+			return ResponseEntity.status(404).body(String.format("Film with an ID: %s does not exist", filmId));
+		}
+		List<Rezervacija> rezervacije = service.getRezervacijaByFilm(film.get());
+		if(rezervacije.isEmpty()) {
+			return ResponseEntity.status(404).body(String.format("Rezervacija with film ID: %s does not exist", filmId));
+		}
+		return ResponseEntity.ok(rezervacije);
+	}
+	
+	@GetMapping("/rezervacijas/sala")
+	public ResponseEntity<?> getRezervacijaBySala(@RequestParam Long salaId){
+		Optional<Sala> sala = salaService.findById(salaId);
+		if(sala.isEmpty()) {
+			return ResponseEntity.status(404).body(String.format("Sala with an ID: %s does not exist", salaId));
+		}
+		List<Rezervacija> rezervacije = service.getRezervacijaBySala(sala.get());
+		if(rezervacije.isEmpty()) {
+			return ResponseEntity.status(404).body(String.format("Rezervacija with sala ID: %s does not exist", salaId));
+		}
+		return ResponseEntity.ok(rezervacije);
+	}
+	
 	
 	@PostMapping ("/rezervacijas")
 	public ResponseEntity<?> createRezervacija(@RequestBody Rezervacija rezervacija)
@@ -79,7 +117,6 @@ public class RezervacijaController {
 			return ResponseEntity.status(204).body(null);
 		}
 		return ResponseEntity.status(404).body(String.format("Resource with an ID: %s does not exist", id));
-		
 	}
 	
 }
