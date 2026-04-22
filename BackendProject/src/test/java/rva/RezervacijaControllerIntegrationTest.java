@@ -94,7 +94,7 @@ class RezervacijaControllerIntegrationTest {
 		assertEquals(200, response.getStatusCode().value());
 		assertNotEquals(0, response.getBody().size());
 		for(Rezervacija r: response.getBody()) {
-			assertEquals(salaId, r.getFilm().getId());
+			assertEquals(salaId, r.getSala().getId());
 		}
 	}
 	
