@@ -1,3 +1,21 @@
 import { Routes } from '@angular/router';
+import {BioskopComponent } from './components/main/bioskop/bioskop';
+import { Sala } from './components/main/sala/sala';
+import { Film } from './components/main/film/film';
+import { Rezervacija } from './components/main/rezervacija/rezervacija';
+import { Author } from './components/utility/author/author';
+import { About } from './components/utility/about/about';
+import { Home } from './components/utility/home/home';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+//definisemo rute, pravimo konfiguracione objekte koje smestamo u ovaj niz, svaki objekat ima 2 propertija (path koji kaze ako 
+//url odgovara pathu ti uradi nesto, i component je komponenta na koju prebacujemo ako odgovara url)
+
+{path: 'bioskop', component: BioskopComponent},
+{path: 'sala', component: Sala},
+{path: 'film', component: Film},
+{path: 'rezervacija', component: Rezervacija},
+{path: 'author', component:Author},
+{path: 'about', component: About},
+{path: '', component:Home, pathMatch:"full"},
+];
