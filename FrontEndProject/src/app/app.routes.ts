@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import {BioskopComponent } from './components/main/bioskop/bioskop';
-import { Sala } from './components/main/sala/sala';
-import { Film } from './components/main/film/film';
+import { BioskopComponent } from './components/main/bioskop/bioskop';
+import { SalaComponent } from './components/main/sala/sala';
+import { FilmComponent } from './components/main/film/film';
 import { Rezervacija } from './components/main/rezervacija/rezervacija';
 import { Author } from './components/utility/author/author';
 import { About } from './components/utility/about/about';
@@ -12,8 +12,8 @@ export const routes: Routes = [
 //url odgovara pathu ti uradi nesto, i component je komponenta na koju prebacujemo ako odgovara url)
 
 {path: 'bioskop', component: BioskopComponent},
-{path: 'sala', component: Sala},
-{path: 'film', component: Film},
+{path: 'sala', component: SalaComponent},
+{path: 'film', component: FilmComponent},
 {path: 'rezervacija', component: Rezervacija},
 {path: 'author', component:Author},
 {path: 'about', component: About},

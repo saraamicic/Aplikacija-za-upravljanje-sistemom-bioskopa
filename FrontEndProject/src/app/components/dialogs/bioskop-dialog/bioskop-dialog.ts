@@ -49,7 +49,7 @@ export class BioskopDialog {
     {
       next: (data)=> {
         this.dialogRef.close(1);
-        this.matSnackBar.open(`Artikl with an ID: ${data.id} has been successfully updated`, `Okay`, {duration:2500})
+        this.matSnackBar.open(`Bioskop with an ID: ${data.id} has been successfully updated`, `Okay`, {duration:2500})
       },
       error: (err)=> {
         this.matSnackBar.open(`There has been an error with PUT request`, `Okay`,{duration:2500});
@@ -64,7 +64,7 @@ export class BioskopDialog {
     {
       next: (data)=> {
         this.dialogRef.close(1);
-        this.matSnackBar.open(`Artikl with an ID: ${this.data.id} has been successfully deleted`, `Okay`, {duration:2500})
+        this.matSnackBar.open(`Bioskop with an ID: ${this.data.id} has been successfully deleted`, `Okay`, {duration:2500})
       },
       error: (err)=> {
         this.matSnackBar.open(`There has been an error with DELETE request`, `Okay`,{duration:2500});
