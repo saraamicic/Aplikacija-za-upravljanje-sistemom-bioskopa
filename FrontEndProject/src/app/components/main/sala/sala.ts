@@ -20,12 +20,14 @@ export class SalaComponent implements OnInit {
   displayedColumns = ['id', 'kapacitet', 'brojRedova', 'bioskop', 'actions'];
   dataSource !: MatTableDataSource<Sala>;
 
+  parentsSelectedSala!: Sala;
+
   constructor(private service: SalaService,
   private dialog: MatDialog 
   ) { this.loadData()}
 
   ngOnInit():void {
-    //this.loadData();
+    this.loadData();
   }
 
   public loadData(): void { 
@@ -60,7 +62,9 @@ export class SalaComponent implements OnInit {
   });
 }
 
-
+public selectRow(row:Sala){
+  this.parentsSelectedSala = row;
+}
 
 
 }

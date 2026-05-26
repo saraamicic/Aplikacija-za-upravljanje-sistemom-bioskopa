@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {
   MAT_DIALOG_DATA,
@@ -21,10 +21,10 @@ import { BioskopService } from '../../../services/bioskop';
   templateUrl: './sala-dialog.html',
   styleUrl: './sala-dialog.css',
 })
-export class SalaDialog {
+export class SalaDialog implements OnInit{
 
     flag!:number;
-    bioskopi: Bioskop[] = [] //cuvamo listu bioskopa za odabir 
+    bioskopi!: Bioskop[]
   
     constructor (
       private matSnackBar: MatSnackBar,
@@ -35,11 +35,9 @@ export class SalaDialog {
     ){}
 
     ngOnInit(): void {
-    // cim se dijalog otvori, ucitavamo sve bioskope iz baze
-    this.bioskopService.getAllBioskops().subscribe({
-      next: (res) => this.bioskopi = res,
-      error: (err) => console.log(err)
-    });
+      this.bioskopService.getAllBioskops().subscribe(
+        (data)=> this.bioskopi = data,
+    )
   }
   
     public add(){
@@ -89,9 +87,10 @@ export class SalaDialog {
       this.matSnackBar.open(`Youve given up on changes!`, `Okay`, {duration:2500});
     };
 
-    compareFn(b1: Bioskop, b2: Bioskop): boolean {
-      return b1 && b2 ? b1.id === b2.id : b1 === b2;
+    public compare(a:any, b:any){
+      return a.id==b.id; //vraca boolean poredjenja dva ida
     }
+
   
   
   

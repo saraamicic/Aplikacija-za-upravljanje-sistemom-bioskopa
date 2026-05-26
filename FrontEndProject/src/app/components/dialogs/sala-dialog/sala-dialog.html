@@ -40,13 +40,11 @@
         <mat-select 
           [(ngModel)]="data.bioskop" 
           name="bioskop" 
-          [compareWith]="compareFn"
+          [compareWith]="compare"
           [disabled]="flag === 3" 
           required>
-          @for (b of bioskopi; track b.id) {
-            <mat-option [value]="b">
-              {{ b.naziv }}
-            </mat-option>
+          @for (bioskop of bioskopi; track bioskop.id) {
+            <mat-option [value]="bioskop">{{bioskop.naziv}}</mat-option>
           }
         </mat-select>
       </mat-form-field>
