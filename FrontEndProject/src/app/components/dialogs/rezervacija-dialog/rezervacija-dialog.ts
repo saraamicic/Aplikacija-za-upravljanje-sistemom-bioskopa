@@ -17,15 +17,14 @@ import { Sala } from '../../../models/sala';
 import { Film } from '../../../models/film';
 
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 @Component({
   selector: 'app-rezervacija-dialog',
   imports: [MatDialogModule, MatFormFieldModule, MatButtonModule, MatInputModule, FormsModule, 
-    MatCheckboxModule, MatDatepickerModule, MatNativeDateModule, MatSelectModule],
+    MatCheckboxModule, MatNativeDateModule, MatSelectModule, MatDatepickerModule ],
   templateUrl: './rezervacija-dialog.html',
   styleUrl: './rezervacija-dialog.css',
 })
@@ -41,15 +40,15 @@ export class RezervacijaDialog implements OnInit {
     private service: RezervacijaService,
     @Inject(MAT_DIALOG_DATA) public data:Rezervacija,
     private salaService: SalaService,
-    private filmService: FilmService
+    private filmService: FilmService,
   ){}
 
   ngOnInit():void{
-    this.salaService.getAllSalas().subscribe(
-      (data)=> this.sale = data,
-    )
-      this.filmService.getAllFilms().subscribe(
+    this.filmService.getAllFilms().subscribe(
       (data)=> this.filmovi = data,
+    )
+    this.salaService.getAllSalas().subscribe(
+        (data)=> this.sale = data,
     )
   }
 

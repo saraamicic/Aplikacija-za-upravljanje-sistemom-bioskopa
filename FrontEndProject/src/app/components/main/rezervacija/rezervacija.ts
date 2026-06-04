@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { AfterViewInit, Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatIconModule } from '@angular/material/icon';
@@ -9,65 +9,64 @@ import { RezervacijaService } from '../../../services/rezervacija';
 import { Film } from '../../../models/film';
 import { RezervacijaDialog } from '../../dialogs/rezervacija-dialog/rezervacija-dialog';
 import { Rezervacija } from '../../../models/rezervacija';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-rezervacija',
-  imports: [MatTableModule, MatIconModule, MatToolbarModule, DatePipe],
+  imports: [MatTableModule, MatIconModule, MatToolbarModule, DatePipe, MatSortModule, MatPaginatorModule],
   templateUrl: './rezervacija.html',
   styleUrl: './rezervacija.css',
 })
-export class RezervacijaComponent implements OnInit, OnChanges{
+export class RezervacijaComponent implements OnInit, OnChanges, AfterViewInit{
 
   displayedColumns = ['id', 'brojOsoba', 'cenaKarte','datum', 'placeno' , 'sala', 'film', 'actions'];
-  dataSource !: MatTableDataSource<Rezervacija>;
+  dataSource : MatTableDataSource<Rezervacija> = new MatTableDataSource<Rezervacija>([]);
 
-  parentsSelectedSala!: Sala;
+  @ViewChild(MatSort) sort!:MatSort; //viewchild znaci izvlacimo iz htmla
+  @ViewChild(MatPaginator) paginator!:MatPaginator;
 
-  constructor(private service: RezervacijaService,
-  private dialog: MatDialog 
-  ) { this.loadData()}
+  @Input()
+  childSelectedSala!:Sala;
+
+  constructor(private service: RezervacijaService, private dialog:MatDialog){}
 
   ngOnChanges(changes: SimpleChanges): void {
-    throw new Error('Method not implemented.');
+    this.loadData();
   }
 
-  @Input() childSelectedSala!: Sala;
-
+  ngAfterViewInit(): void {
+    this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+  }
+  
   ngOnInit():void {
     this.loadData();
   }
 
    public loadData(): void { 
+    this.dataSource.data = [];
     this.service.getRezervacijaBySala(this.childSelectedSala.id).subscribe(
-      {next: (data) => this.dataSource = new MatTableDataSource<Rezervacija>(data), 
+      {next: (data) => {this.dataSource.data=data}, 
       error: (err) => console.log(err)}
     )
 
   }
-  public openDialog(flag: number, id?: number, brojOsoba?: number, cenaKarte?: number,datum?:Date, 
-    placeno?:boolean , sala?: Sala, film?:Film): void {
-    let dialogData;
-    if (flag === 1) {
-      dialogData = { 
-        id: 0, 
-        kapacitet: null, 
-        brojRedova: null, 
-        bioskop: { id: null, naziv: '' }
-      };
-    } else { 
-      dialogData = { id, brojOsoba, cenaKarte, datum, placeno, sala, film }; 
-    }
 
-    const ref = this.dialog.open(RezervacijaDialog, {
-      data: dialogData
-    });
+
+  public openDialog(flag:number, id?:number, brojOsoba?:number, cenaKarte?:number, datum?:Date, placeno?:boolean, film?:Film, sala?:Sala ):void{
+    const ref = this.dialog.open(RezervacijaDialog, {data: {id, brojOsoba, cenaKarte, datum, placeno, film, sala}});
     ref.componentInstance.flag = flag;
-    ref.afterClosed().subscribe((response) => {
-      if (response === 1) {
-        this.loadData();
+    ref.componentInstance.data.sala = this.childSelectedSala;
+    ref.afterClosed().subscribe(
+      (response) => {
+        if(response === 1){
+          this.loadData();
+        }
       }
-    });
+    )
   }
+    
 
 }
 

@@ -1,81 +1,58 @@
 <div class="container">
   @if (flag === 1) {
-    <h3 mat-dialog-title>Adding sala</h3>
+  <h3 mat-dialog-title>Adding sala</h3>
   } @else if (flag === 2) {
-    <h3 mat-dialog-title>Updating sala: {{ data.kapacitet }}</h3>
+  <h3 mat-dialog-title>Updating sala: {{ data.id }}</h3>
   } @else if (flag === 3) {
-    <h3 mat-dialog-title>Deleting sala: {{ data.kapacitet }}</h3>
+  <h3 mat-dialog-title>Deleting sala: {{ data.id }}</h3>
   }
 
   <form class="mat-dialog-content" #formControl="ngForm">
     <div class="form">
       <mat-form-field>
-        <input
-          matInput
-          placeholder="Kapacitet"
-          name="Kapacitet"
-          [disabled]="flag == 3"
-          [(ngModel)]="data.kapacitet"
-          required
-        />
+        <input matInput placeholder="Kapacitet" name="Kapacitet" [disabled]="flag == 3" [(ngModel)]="data.kapacitet"
+          required />
       </mat-form-field>
     </div>
 
     <div class="form">
       <mat-form-field>
-        <input
-          matInput
-          placeholder="Broj redova"
-          name="Broj redova"
-          [disabled]="flag == 3"
-          [(ngModel)]="data.brojRedova"
-          required
-        />
+        <input matInput placeholder="Broj redova" name="Broj redova" [disabled]="flag == 3"
+          [(ngModel)]="data.brojRedova" required />
       </mat-form-field>
     </div>
 
-      <div class="form">  
-      <mat-form-field>
-        <mat-label>Bioskop</mat-label>
-        <mat-select 
-          [(ngModel)]="data.bioskop" 
-          name="bioskop" 
-          [compareWith]="compare"
-          [disabled]="flag === 3" 
-          required>
-          @for (bioskop of bioskopi; track bioskop.id) {
-            <mat-option [value]="bioskop">{{bioskop.naziv}}</mat-option>
-          }
-        </mat-select>
-      </mat-form-field>
-    </div>
+    <div class="form">
+        <mat-form-field>
+          <mat-select
+            [compareWith]="compare"
+            placeholder="Bioskop"
+            name="bioskop"
+            [disabled]="flag == 3"
+            [(ngModel)]="data.bioskop"
+            required
+          >
+            @for(bioskop of bioskopi; track bioskop.id){
+                <mat-option [value]="bioskop">{{bioskop.naziv}}</mat-option>
+            }
+            </mat-select>
+        </mat-form-field>
+      </div>
 
   </form>
 
   <div class="mat-dialog-actions">
     @if (flag === 1) {
-      <button
-        matButton
-        type="submit"
-        mat-dialog-close="1"
-        [disabled]="!formControl.valid"
-        (click)="add()"
-      >
-        Save
-      </button>
+    <button matButton type="submit" mat-dialog-close="1" [disabled]="!formControl.valid" (click)="add()">
+      Save
+    </button>
     } @else if (flag === 2) {
-      <button
-        matButton
-        type="submit"
-        mat-dialog-close="1"
-        [disabled]="!formControl.valid"
-        (click)="update()"
-      >
-        Update
-      </button>
+    <button matButton type="submit" mat-dialog-close="1" [disabled]="!formControl.valid" (click)="update()">
+      Update
+    </button>
     } @else if (flag === 3) {
-      <button matButton mat-dialog-close="1" (click)="delete()"> Delete </button>
-      
+    <button matButton mat-dialog-close="1" (click)="delete()"> Delete </button>
+
     }
 
     <button matButton (click)="cancel()"> Cancel</button>

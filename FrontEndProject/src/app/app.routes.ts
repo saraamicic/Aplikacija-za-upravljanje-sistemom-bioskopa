@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { BioskopComponent } from './components/main/bioskop/bioskop';
 import { SalaComponent } from './components/main/sala/sala';
 import { FilmComponent } from './components/main/film/film';
-import { Rezervacija } from './components/main/rezervacija/rezervacija';
+import { RezervacijaComponent } from './components/main/rezervacija/rezervacija';
 import { Author } from './components/utility/author/author';
 import { About } from './components/utility/about/about';
 import { Home } from './components/utility/home/home';
@@ -14,7 +14,7 @@ export const routes: Routes = [
 {path: 'bioskop', component: BioskopComponent},
 {path: 'sala', component: SalaComponent},
 {path: 'film', component: FilmComponent},
-{path: 'rezervacija', component: Rezervacija},
+{path: 'rezervacija', component: RezervacijaComponent},
 {path: 'author', component:Author},
 {path: 'about', component: About},
 {path: '', component:Home, pathMatch:"full"},

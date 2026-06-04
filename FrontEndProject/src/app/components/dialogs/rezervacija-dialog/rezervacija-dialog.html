@@ -1,124 +1,110 @@
-
 <div class="container">
   @if (flag === 1) {
-    <h3 mat-dialog-title>Adding rezervacija</h3>
+  <h3 mat-dialog-title>Adding rezervacija</h3>
   } @else if (flag === 2) {
-    <h3 mat-dialog-title>Updating rezervacija: {{ data.id }}</h3>
+  <h3 mat-dialog-title>Updating rezervacija: {{ data.id }}</h3>
   } @else if (flag === 3) {
-    <h3 mat-dialog-title>Deleting rezervacija: {{ data.id }}</h3>
+  <h3 mat-dialog-title>Deleting rezervacija: {{ data.id }}</h3>
   }
   <!--ngModel koristimo da kad se promeni nesto u input polju, menjaju se i podaci-->
   <form class="mat-dialog-content" #formControl="ngForm">
-    <div class="form">
-      <mat-form-field>
-        <input
-          matInput
-          [matDatePicker]="datum"
-          placeholder="Datum"
-          name="Datum"
-          [disabled]="flag == 3"
-          [(ngModel)]="data.datum"
-          required
-        />
-        <mat-datepicker-toggle matSuffix [for]="datum">  </mat-datepicker-toggle>
-        <mat-datepicker #datum ></mat-datepicker>
-      </mat-form-field>
-    </div>
+      <div class="form">
+        <mat-form-field>
+          <input
+            matInput
+            [matDatepicker]="datum"
+            placeholder="Datum"
+            name="datum"
+            [disabled]="flag == 3"
+            [(ngModel)]="data.datum"
+            required
+          />
+          <mat-datepicker-toggle matSuffix [for]="datum"></mat-datepicker-toggle>
+          <mat-datepicker #datum></mat-datepicker>
+        </mat-form-field>
+      </div>
 
-    <div class="form">
-      <mat-form-field>
-        <input
-          matInput
+      <div class="form">
+        <mat-form-field>
+          <input matInput 
           placeholder="Broj osoba"
-          name="Broj osoba"
-          [disabled]="flag == 3"
+          name="brojOsoba" 
+          [disabled]="flag == 3" 
           [(ngModel)]="data.brojOsoba"
-          required
-        />
-      </mat-form-field>
-    </div>
+          required />
+        </mat-form-field>
+      </div>
 
-        <div class="form">
-      <mat-form-field>
-        <input
-          matInput
+      <div class="form">
+        <mat-form-field>
+          <input matInput 
           placeholder="Cena karte"
-          name="Cena karte"
-          [disabled]="flag == 3"
+          name="cenaKarte" 
+          [disabled]="flag == 3" 
           [(ngModel)]="data.cenaKarte"
-          required
-        />
-      </mat-form-field>
-    </div>
+            required />
+        </mat-form-field>
+      </div>
 
-        <div class="form">
-            <mat-checkbox
-                name="placeno" [disabled]="flag==3" [(ngModel)]="data.placeno"    
-            >
-                Placeno
-            </mat-checkbox>
-    </div>
+      <div class="form">
+        <mat-checkbox 
+        name="placeno"
+        [disabled]="flag==3" 
+        [(ngModel)]="data.placeno">
+          Placeno
+        </mat-checkbox>
+      </div>
 
-            <!--strani kljucevi-->
-        <div class="form">
-            <mat-form-field
+      <!--strani kljucevi-->
+      <div class="form">
+            <mat-form-field>
+            <mat-select
                 [compareWith]="compare"
                 placeholder="Film"
-                name="Film"
+                name="film"
                 [disabled]="flag == 3"
                 [(ngModel)]="data.film"
                 required
-                >
+            >
                 @for(film of filmovi; track film.id){
                     <mat-option [value]="film">{{film.naziv}}</mat-option>
                 }
                 </mat-select>
             </mat-form-field>
-            </div>
+        </div>
 
-            <div class="form">
-            <mat-form-field
+      <div class="form">
+            <mat-form-field>
+            <mat-select
                 [compareWith]="compare"
                 placeholder="Sala"
-                name="Sala"
+                name="sala"
                 [disabled]="flag == 3"
                 [(ngModel)]="data.sala"
                 required
-                >
+            >
                 @for(sala of sale; track sala.id){
-                    <mat-option [value]="sala">{{sala.naziv}}</mat-option>
+                    <mat-option [value]="sala">{{sala.kapacitet}}</mat-option>
                 }
                 </mat-select>
             </mat-form-field>
-            </div>
-    
+        </div>
+
 
   </form>
 
   <div class="mat-dialog-actions">
     @if (flag === 1) {
-      <button
-        matButton
-        type="submit"
-        mat-dialog-close="1"
-        [disabled]="!formControl.valid"
-        (click)="add()"
-      >
-        Save
-      </button>
+    <button matButton type="submit" mat-dialog-close="1" [disabled]="!formControl.valid" (click)="add()">
+      Save
+    </button>
     } @else if (flag === 2) {
-      <button
-        matButton
-        type="submit"
-        mat-dialog-close="1"
-        [disabled]="!formControl.valid"
-        (click)="update()"
-      >
-        Update
-      </button>
+    <button matButton type="submit" mat-dialog-close="1" [disabled]="!formControl.valid" (click)="update()">
+      Update
+    </button>
     } @else if (flag === 3) {
-      <button matButton mat-dialog-close="1" (click)="delete()"> Delete </button>
-      
+    <button matButton mat-dialog-close="1" (click)="delete()"> Delete </button>
+
     }
 
     <button matButton (click)="cancel()"> Cancel</button>
