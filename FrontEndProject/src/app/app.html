@@ -1,46 +1,33 @@
-<mat-sidenav-container class="example-container">
-  <mat-sidenav mode="over" [fixedInViewport]="true" opened mode="side">
-    <mat-accordion>
-      <a mat-button routerLink=""  style="text-align: center">
-        <mat-icon>home</mat-icon>
-      </a>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title> Aplikacija </mat-panel-title>
-          <mat-panel-description>
-            Aplikacija za upravljanje radom bioskopa
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <mat-nav-list>
-          <a mat-raised-button routerLink="/bioskop" style="background-color: rgb(246, 242, 255)">Bioskop</a>
-        </mat-nav-list>
-        <mat-nav-list>
-          <a mat-raised-button routerLink="/film" style="background-color: rgb(246, 242, 255)">Film</a>
-        </mat-nav-list>
-        <mat-nav-list>
-          <a mat-raised-button routerLink="/sala" style="background-color: rgb(246, 242, 255)">Sala</a>
-        </mat-nav-list>
-      </mat-expansion-panel>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title style="text-align: left"
-            >Informacije</mat-panel-title
-          >
-          <mat-panel-description>
-            Osnovne informacije o aplikaciji
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <mat-nav-list>
-          <a mat-button routerLink="/about" >O nama</a>
-        </mat-nav-list>
-        <mat-nav-list>
-          <a mat-button routerLink="/author" >Autor</a>
-        </mat-nav-list>
-        <mat-nav-list>
-          <a mat-button routerLink="" >Pocetna</a>
-        </mat-nav-list>
-      </mat-expansion-panel>
-    </mat-accordion>
-  </mat-sidenav>
+<nav class="navbar">
+  <a routerLink="/" class="brand-link">
+    <mat-icon>movie</mat-icon>
+    <span>Bioskop</span>
+  </a>
+
+  <div class="navbar-links">
+    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}" class="nav-link">Početna</a>
+    <a routerLink="/about" routerLinkActive="active" class="nav-link">O nama</a>
+    <a routerLink="/author" routerLinkActive="active" class="nav-link">Autor</a>
+
+    <div class="dropdown-wrap" (mouseenter)="open=true" (mouseleave)="open=false">
+      <button class="nav-link dropdown-btn" [class.active]="isApp()">
+        Aplikacija <mat-icon class="arr" [class.rotated]="open">expand_more</mat-icon>
+      </button>
+      <div class="dropdown" [class.visible]="open">
+        <a routerLink="/bioskop" routerLinkActive="active" class="dd-item" (click)="open=false">
+          <mat-icon>business</mat-icon> Bioskop
+        </a>
+        <a routerLink="/film" routerLinkActive="active" class="dd-item" (click)="open=false">
+          <mat-icon>movie</mat-icon> Film
+        </a>
+        <a routerLink="/sala" routerLinkActive="active" class="dd-item" (click)="open=false">
+          <mat-icon>weekend</mat-icon> Sala
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<main class="page-content">
   <router-outlet></router-outlet>
-</mat-sidenav-container>
+</main>

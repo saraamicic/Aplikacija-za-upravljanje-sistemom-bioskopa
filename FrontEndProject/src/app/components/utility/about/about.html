@@ -1,1 +1,52 @@
-<p>about works!</p>
+<section class="banner">
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <h1 class="banner-title">Gde nas sve možete posetiti</h1>
+    <p class="banner-sub">Pronađite vama najbliže veliko platno i uživajte u zvuku i slici najnovije generacije.</p>
+  </div>
+  <div class="banner-posters" aria-hidden="true">
+    <div class="poster p1"></div>
+    <div class="poster p2"></div>
+    <div class="poster p3"></div>
+  </div>
+</section>
+
+<section class="general-info">
+  <div class="info-content">
+    <h2>Naša Priča</h2>
+    <p>
+      Već više od decenije, naš bioskop predstavlja glavno mesto okupljanja svih ljubitelja sedme umetnosti. 
+      Sa najsavremenijom laserskom tehnologijom projektora i Dolby Atmos ozvučenjem, trudimo se da svaki vaš dolazak pretvorimo u nezaboravno iskustvo. 
+      Ponosni smo što se širimo i što smo danas dostupni na čak 7 lokacija širom zemlje, donoseći vam magiju filma direktno u vaš komšiluk.
+    </p>
+  </div>
+</section>
+
+<section class="locations-section">
+  <div *ngIf="loading" class="loading-state">
+    <mat-icon>hourglass_empty</mat-icon> Učitavanje lokacija...
+  </div>
+
+  <div class="location-card" *ngFor="let b of bioskopi; let i = index" [class.reverse]="i % 2 !== 0">
+    
+    <div class="location-poster">
+      <img [src]="b.slika" [alt]="b.naziv" class="location-img">
+    </div>
+
+    <div class="location-info">
+      <h3 class="location-name">{{ b.naziv }}</h3>
+      
+      <div class="location-details">
+        <p class="detail-item">
+          <mat-icon>place</mat-icon>
+          <span><strong>Adresa:</strong> {{ b.adresa }}</span>
+        </p>
+        <p class="detail-item">
+          <mat-icon>phone</mat-icon>
+          <span><strong>Telefon:</strong> {{ b.telefon }}</span>
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>

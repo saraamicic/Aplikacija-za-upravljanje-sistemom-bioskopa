@@ -1,1 +1,56 @@
-<p>home works!</p>
+<section class="banner">
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <h1 class="banner-title">Najnoviji filmovi<br>na velikom platnu</h1>
+    <p class="banner-sub">Rezervišite mesta unapred i ne propustite hit naslove</p>
+  </div>
+  <div class="banner-posters" aria-hidden="true">
+    <div class="poster p1"></div>
+    <div class="poster p2"></div>
+    <div class="poster p3"></div>
+  </div>
+</section>
+
+<section class="films-section">
+  <div class="films-header">
+    <h2 class="films-title">U bioskopima ove nedelje</h2>
+  </div>
+
+  <div *ngIf="loading" class="loading-state">
+    <mat-icon>hourglass_empty</mat-icon> Učitavanje...
+  </div>
+
+  <div *ngIf="!loading && films.length === 0" class="empty-state">
+    Nema dostupnih filmova.
+  </div>
+
+  <div class="film-card" *ngFor="let film of films">
+    <div class="film-poster">
+      <img *ngIf="film.slika" [src]="film.slika" [alt]="film.naziv" class="poster-img">
+      <mat-icon *ngIf="!film.slika">movie</mat-icon>
+    </div>
+    <div class="film-info">
+      <div class="film-top-row">
+        <h3 class="film-title">{{ film.naziv }}</h3>
+        <div class="film-rating">
+          <span class="rating-num">{{ film.recenzija }}</span>
+          <mat-icon class="star-icon">star</mat-icon>
+        </div>
+      </div>
+
+      <div class="film-genres">
+        <span class="genre-tag">{{ film.zanr }}</span>
+      </div>
+
+      <p class="film-description" *ngIf="film.opis">
+        {{ film.opis }}
+      </p>
+
+      <div class="film-footer">
+        <div class="film-meta">
+          <span class="meta-item"><mat-icon>schedule</mat-icon> {{ film.trajanje }} min</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

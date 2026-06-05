@@ -1,21 +1,22 @@
-import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { RouterLink } from '@angular/router';
+import { Component } from '@angular/core';
+import { RouterOutlet, RouterLink, RouterLinkActive, Router } from '@angular/router';
 import { MatButtonModule } from '@angular/material/button';
-import { MatExpansionModule } from '@angular/material/expansion';
 import { MatIcon } from '@angular/material/icon';
-import { MatNavList } from '@angular/material/list';
-import { MatSidenav, MatSidenavContainer } from '@angular/material/sidenav';
 import { CommonModule } from '@angular/common';
-
-
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, RouterLink, MatButtonModule, MatExpansionModule, MatIcon, MatNavList, MatSidenav, MatSidenavContainer, CommonModule],
+  imports: [RouterOutlet, RouterLink, RouterLinkActive, MatButtonModule, MatIcon, CommonModule],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('FrontEndProject');
+  open = false;
+
+  constructor(private router: Router) {}
+
+  isApp(): boolean {
+    return ['/bioskop', '/film', '/sala', '/rezervacija']
+      .some(r => this.router.url.startsWith(r));
+  }
 }

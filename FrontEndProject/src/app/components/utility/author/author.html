@@ -1,1 +1,41 @@
-<p>author works!</p>
+<section class="banner">
+  <div class="banner-overlay"></div>
+  <div class="banner-content">
+    <h1 class="banner-title">O Autoru ovog projekta</h1>
+    <p class="banner-sub">i koje to filmove ona preporučuje</p>
+  </div>
+  
+  <div class="banner-posters" aria-hidden="true">
+    <div class="poster p1"></div>
+    <div class="poster p2"></div>
+    <div class="poster p3"></div>
+  </div>
+</section>
+
+<section class="author-section">
+  <div class="author-card">
+    <div class="author-info">
+      <h2>Biografija</h2>
+      
+      <p class="author-text">
+        Autor ovog sjajnog projekta koji upravo gledate je Sara Mićić IT58/2023, studentkinja treće godine smera Inženjerstvo informacionih sistema na Fakultetu tehničkih nauka u Novom Sadu.
+        Ovaj projekat je kreiran koristeći Spring Framework na backendu i Angular na frontendu. Nadam se da vam se dopada!
+      </p>
+      <p class="author-text">
+        U nastavku ću vam prikazati neke od mojih omiljenih filmova!
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="recommendations-section">
+  <h2 class="author-info">Autor preporučuje</h2>
+  <div class="recommendations-track">
+    <div class="rec-film-card" *ngFor="let film of preporuceniFilmovi">
+      <div class="rec-poster">
+        <img [src]="film.slika" [alt]="film.naziv" class="rec-img">
+      </div>
+      <h3 class="rec-name">{{ film.naziv }}</h3>
+    </div>
+  </div>
+</section>
