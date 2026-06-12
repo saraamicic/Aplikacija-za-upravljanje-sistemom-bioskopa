@@ -23,9 +23,6 @@
 </section>
 
 <section class="locations-section">
-  <div *ngIf="loading" class="loading-state">
-    <mat-icon>hourglass_empty</mat-icon> Učitavanje lokacija...
-  </div>
 
   <div class="location-card" *ngFor="let b of bioskopi; let i = index" [class.reverse]="i % 2 !== 0">
     

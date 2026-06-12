@@ -55,7 +55,7 @@
 .dropdown-wrap { position: relative; }
 .dropdown {
   position: absolute;
-  top: calc(100% + 8px);
+  top: calc(100% + 8px); /* Ova praznina pravi problem */
   right: 0;
   min-width: 190px;
   background: #110b30;
@@ -67,6 +67,16 @@
   transform: translateY(-6px);
   transition: opacity 0.18s, transform 0.18s;
   z-index: 200;
+}
+
+.dropdown::before {
+  content: '';
+  position: absolute;
+  top: -12px; /* Pokriva tih 8px praznine i malo zalazi preko dugmeta */
+  left: 0;
+  width: 100%;
+  height: 12px; /* Visina nevidljivog mosta */
+  background: transparent; /* Potpuno nevidljivo, ali detektuje miš */
 }
 .dropdown.visible { opacity: 1; pointer-events: all; transform: translateY(0); }
 

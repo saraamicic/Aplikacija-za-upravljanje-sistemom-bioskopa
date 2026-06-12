@@ -16,10 +16,6 @@
     <h2 class="films-title">U bioskopima ove nedelje</h2>
   </div>
 
-  <div *ngIf="loading" class="loading-state">
-    <mat-icon>hourglass_empty</mat-icon> Učitavanje...
-  </div>
-
   <div *ngIf="!loading && films.length === 0" class="empty-state">
     Nema dostupnih filmova.
   </div>
