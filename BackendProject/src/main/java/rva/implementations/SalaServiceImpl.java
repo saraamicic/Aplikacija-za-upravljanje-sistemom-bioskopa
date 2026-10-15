@@ -36,12 +36,14 @@ public class SalaServiceImpl implements SalaService {
 	@Override
 	public Optional<Sala> update(Sala body, long id) {
 		
+		//proveri jel postoji taj id, ako da onda dodaj ga u body kako bi save znao da je apdejtovanje
 		if(existsById(id))
 		{
 			body.setId(id);
 			return Optional.of(repo.save(body));
 		}
 		
+		//kontroler ce pretvoriti u 404 jer je nista
 		return Optional.empty();
 	}
 

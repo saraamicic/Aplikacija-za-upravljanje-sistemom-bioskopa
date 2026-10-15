@@ -44,6 +44,7 @@ export class FilmDialog {
       }}
     )
   };
+  
   public update(){
     this.service.updateFilm(this.data.id, this.data).subscribe(
     {

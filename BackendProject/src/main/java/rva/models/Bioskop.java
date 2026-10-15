@@ -13,7 +13,6 @@ import jakarta.persistence.SequenceGenerator;
 @Entity
 public class Bioskop {
 
-	
 	@Id
 	@SequenceGenerator(name = "bioskop_seq", sequenceName = "bioskop_seq", allocationSize=1) // za koliko ce se sekvenca povecavati i kako se zove
 	@GeneratedValue (strategy = GenerationType.SEQUENCE , generator = "bioskop_seq")
@@ -43,7 +42,6 @@ public class Bioskop {
 	public void setId(long id) {
 		this.id = id;
 	}
-
 
 	public String getNaziv() {
 		return naziv;

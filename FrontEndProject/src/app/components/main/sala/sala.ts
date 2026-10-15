@@ -22,11 +22,11 @@ export class SalaComponent implements OnInit, AfterViewInit {
 
   displayedColumns = ['id', 'kapacitet', 'brojRedova', 'bioskop', 'actions'];
   dataSource: MatTableDataSource<Sala> = new MatTableDataSource<Sala>([]);
+  parentSelectedSala!: Sala; //promenljiva u koju cemo smestiti salu na koju je kliknuo korisnik
 
   @ViewChild(MatSort) sort!: MatSort; //viewchild znaci izvlacimo iz htmla
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
-  parentSelectedSala!: Sala;
 
   constructor(private service: SalaService,
     private dialog: MatDialog

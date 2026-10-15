@@ -44,7 +44,7 @@ export class RezervacijaComponent implements OnInit, OnChanges, AfterViewInit{
     this.loadData();
   }
 
-   public loadData(): void { 
+  public loadData(): void { 
     this.dataSource.data = [];
     this.service.getRezervacijaBySala(this.childSelectedSala.id).subscribe(
       {next: (data) => {this.dataSource.data=data}, 

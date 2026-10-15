@@ -5,7 +5,7 @@ import { Sala } from '../models/sala';
 
 
 @Injectable({
-  providedIn: 'root',
+  providedIn: 'root', //samo jedan
 })
 export class SalaService {
 

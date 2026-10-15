@@ -34,6 +34,7 @@ export class SalaDialog implements OnInit{
       private bioskopService: BioskopService //injektujemo bioskopservice
     ){}
 
+    //trebaju nam bioskopi jer su fk
     ngOnInit(): void {
       this.bioskopService.getAllBioskops().subscribe(
         (data)=> this.bioskopi = data,
